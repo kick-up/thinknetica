@@ -18,18 +18,18 @@
 
   puts "Укажите три коэффициента"
 
-  puts "A"
+  puts 'A'
   a = gets.to_f
 
-  puts "B"
+  puts 'B'
   b = gets.to_f
 
-  puts "C"
+  puts 'C'
   c = gets.to_f
 
   #Формула дискриминанта: D=b2-4ac
 
-  discriminant = b ** 2 - 4 * a * c
+  discriminant = b**2 - 4 * a * c
   puts "Дискриминант равен #{discriminant}"
 
   if discriminant > 0 
