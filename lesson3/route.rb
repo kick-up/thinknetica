@@ -17,7 +17,7 @@ class Route
   end
 
 #Может удалять промежуточную станцию из списка
-  def delete_station(station)
+  def delete_transit(station)
     @transit.delete(station)
   end
 
