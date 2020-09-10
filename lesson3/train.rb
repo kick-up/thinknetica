@@ -48,7 +48,7 @@ class Train
   def take_rout(route)
     @route  =  route
     @current_station  =  0
-    @current_station(self)
+    @current_station.train_in(self)
   end
 
   def current_station
@@ -60,7 +60,7 @@ class Train
   end
 
   def previous_station
-    return @current_station.positive?
+    return unless @current_station.positive?
     @route.stations[@current_station  -  1]
   end
 
@@ -69,16 +69,16 @@ class Train
 
   def move
     return if next_station.nil?
-      current_station.train_out(self)
-      @current_station  +=  1
-      current_station.train_in(self)
+    current_station.train_out(self)
+    @current_station  +=  1
+    current_station.train_in(self)
   end
 
   def back
     return if previous_station.nil?
-      current_station.train_out(self)
-      @current_station  -=  1
-      current_station.train_in(self)
+    current_station.train_out(self)
+    @current_station  -=  1
+    current_station.train_in(self)
   end
 
 end
