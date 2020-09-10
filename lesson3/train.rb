@@ -1,5 +1,6 @@
 #Класс Train (Поезд):
-
+require_relative("route")
+require_relative("station")
 
 class Train
   attr_reader :number, :carriages, :type, :speed :route
@@ -45,33 +46,39 @@ class Train
 #Возвращать предыдущую станцию, текущую, следующую, на основе маршрута
 
   def take_rout(route)
-    @route  ==  route
-    @current_station  ==  0
+    @route  =  route
+    @current_station  =  0
+    @current_station(self)
   end
 
   def current_station
-    @route[@current_station]
+    @route.stations[@current_station]
   end
 
   def next_station
-    @route[current_station  + 1]
+    @route.stations[current_station  + 1]
   end
 
   def previous_station
-    @route[@current_station  -  1]
+    return @current_station.positive?
+    @route.stations[@current_station  -  1]
   end
 
 #Перемещение возможно вперед и назад, 
 #но только на 1 станцию за раз.
 
   def move
-    if next_station.nil?
-      @current_station += 1
+    return if next_station.nil?
+      current_station.train_out(self)
+      @current_station  +=  1
+      current_station.train_in(self)
   end
 
   def back
-    if previous_station.nil?
-      @current_station -= 1
+    return if previous_station.nil?
+      current_station.train_out(self)
+      @current_station  -=  1
+      current_station.train_in(self)
   end
 
 end
