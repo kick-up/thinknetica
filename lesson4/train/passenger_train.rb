@@ -5,6 +5,6 @@ class PassengerTrain  < Train
   end
 
   def attachable_carriage?(carriage)
-    carriage.is_a?(PassengerCarriage)
+    if carriage.type == :passanger
   end
 end
