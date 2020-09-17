@@ -14,6 +14,8 @@ class Main
     @routes = []
   end
 
+private
+
   TRAIN_TYPES = [PassengerTrain, CargoTrain]
 
   def print_state
