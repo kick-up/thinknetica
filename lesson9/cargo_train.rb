@@ -1,0 +1,16 @@
+# frozen_string_literal: true
+
+require_relative 'instance_counter'
+require_relative 'manufacturer'
+
+# This thread is to ignore Documentation offense
+class CargoTrain < Train
+  def initialize(number)
+    @type = 'Cargo'
+    super
+  end
+
+  def attachable_carriage?(carriage)
+    carriage.is_a?(CargoCarriage)
+  end
+end
