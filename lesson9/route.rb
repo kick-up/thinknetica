@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 require_relative 'instance_counter'
-require_relative 'valid'
+require_relative 'validation'
+require_relative 'station'
 
 # This thread is to ignore Documentation offense
 class Route
@@ -10,7 +11,10 @@ class Route
   DOUBLE_APPEARANCE = 'Станция не может быть конечной и начальной одновременно'
 
   include InstanceCounter
-  include Valid
+  include Validation
+
+  validate :origin, :type, Station
+  validate :destination, :type, Station
 
   def initialize(origin, destination)
     @origin = origin
@@ -33,8 +37,8 @@ class Route
 
   protected
 
-  def validate!
-    raise OBJECT_NIL if origin.nil? || destination.nil?
-    raise DOUBLE_APPEARANCE if origin == destination
-  end
+  #def validate!
+    #raise OBJECT_NIL if origin.nil? || destination.nil?
+    #raise DOUBLE_APPEARANCE if origin == destination
+  #end
 end

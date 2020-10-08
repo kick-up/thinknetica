@@ -1,20 +1,25 @@
 # frozen_string_literal: true
 
 require_relative 'instance_counter'
-require_relative 'valid'
-require_relative 'train'
-require_relative 'cargo_train'
-require_relative 'passenger_train'
+require_relative 'validation'
+require_relative 'accessors'
 
 # This thread is to ignore Documentation offense
 class Station
-  attr_reader :name, :trains
 
   NAME_FORMAT = /^[\w]{2,}$/.freeze
   INVALID_NAME = 'Неверный формат. Используйте любые 2 латинские буквы, цифры и символы - и _'
 
   include InstanceCounter
-  include Valid
+  include Validation
+  extend Accessors
+
+  attr_reader :trains
+
+  attr_accessor_with_history :name
+
+  validate :name, :presence
+  validate :name, :format, NAME_FORMAT
 
   @@stations = []
 
@@ -54,9 +59,9 @@ class Station
     name
   end
 
-  protected
+  #protected
 
-  def validate!
-    raise INVALID_NAME if @name !~ NAME_FORMAT
-  end
+  #def validate!
+   # raise INVALID_NAME if @name !~ NAME_FORMAT
+  #end
 end
